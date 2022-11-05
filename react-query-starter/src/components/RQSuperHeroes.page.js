@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
 
 export const RQSuperHeroesPage = () => {
@@ -9,7 +10,8 @@ export const RQSuperHeroesPage = () => {
     console.log("Perfom side effect after encountering error", error);
   };
 
-  const { data, isLoading, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError);
+  const { data, isLoading, isError, error, isFetching, refetch } =
+    useSuperHeroesData(onSuccess, onError);
   console.log({
     isLoading,
     isFetching,
@@ -27,11 +29,10 @@ export const RQSuperHeroesPage = () => {
     <>
       <h2>React Query Super Heroes Page</h2>
       <button onClick={refetch}>Fetch heroes</button>
-      {/* {data?.data.map((hero) => (
-        <div key={hero.id}>{hero.name}</div>
-      ))} */}
-      {data.map((heroName) => (
-        <div key={heroName}>{heroName}</div>
+      {data?.data.map((hero) => (
+        <div key={hero.id}>
+          <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
+        </div>
       ))}
     </>
   );
